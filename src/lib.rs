@@ -170,6 +170,7 @@ extern "C" {
     pub fn lua_isnumber(L: *mut lua_State, idx: c_int) -> c_int;
     pub fn lua_isstring(L: *mut lua_State, idx: c_int) -> c_int;
     pub fn lua_iscfunction(L: *mut lua_State, idx: c_int) -> c_int;
+    pub fn lua_isinteger(L: *mut lua_State, idx: c_int) -> c_int;
     pub fn lua_isuserdata(L: *mut lua_State, idx: c_int) -> c_int;
     pub fn lua_type(L: *mut lua_State, idx: c_int) -> c_int;
     pub fn lua_typename(L: *mut lua_State, tp: c_int) -> *const libc::c_char;
