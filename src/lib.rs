@@ -174,8 +174,8 @@ extern "C" {
     pub fn lua_type(L: *mut lua_State, idx: c_int) -> c_int;
     pub fn lua_typename(L: *mut lua_State, tp: c_int) -> *const libc::c_char;
 
-    pub fn lua_tonumberx(L: *mut lua_State, idx: c_int, isnum: Option<*mut c_int>) -> lua_Number;
-    pub fn lua_tointegerx(L: *mut lua_State, idx: c_int, isnum: Option<*mut c_int>) -> lua_Integer;
+    pub fn lua_tonumberx(L: *mut lua_State, idx: c_int, isnum: *mut c_int) -> lua_Number;
+    pub fn lua_tointegerx(L: *mut lua_State, idx: c_int, isnum: *mut c_int) -> lua_Integer;
     pub fn lua_toboolean(L: *mut lua_State, idx: c_int) -> c_int;
     pub fn lua_tolstring(L: *mut lua_State,
                          idx: c_int,
@@ -333,12 +333,12 @@ pub unsafe fn lua_getextraspace(L: *mut lua_State) -> *mut libc::c_void {
 
 #[inline(always)]
 pub unsafe fn lua_tonumber(L: *mut lua_State, idx: c_int) -> lua_Number {
-    lua_tonumberx(L, idx, None)
+    lua_tonumberx(L, idx, ptr::null_mut())
 }
 
 #[inline(always)]
 pub unsafe fn lua_tointeger(L: *mut lua_State, idx: c_int) -> lua_Integer {
-    lua_tointegerx(L, idx, None)
+    lua_tointegerx(L, idx, ptr::null_mut())
 }
 
 #[inline(always)]
@@ -445,14 +445,14 @@ pub unsafe fn lua_pushunsigned(L: *mut lua_State, n: lua_Unsigned) {
 #[inline(always)]
 pub unsafe fn lua_tounsignedx(L: *mut lua_State,
                               idx: c_int,
-                              isnum: Option<*mut c_int>)
+                              isnum: *mut c_int)
                               -> lua_Unsigned {
     lua_tointegerx(L, idx, isnum) as lua_Unsigned
 }
 
 #[inline(always)]
 pub unsafe fn lua_tounsigned(L: *mut lua_State, idx: c_int) -> lua_Unsigned {
-    lua_tounsignedx(L, idx, None)
+    lua_tounsignedx(L, idx, ptr::null_mut())
 }
 
 impl default::Default for lua_Debug {
