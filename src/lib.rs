@@ -247,6 +247,17 @@ extern "C" {
                       ctx: lua_KContext,
                       k: Option<lua_KFunction>)
                       -> c_int;
+    pub fn lua_load(L: *mut lua_State,
+                    reader: lua_Reader,
+                    dt: *mut libc::c_void,
+                    chunkname: *const libc::c_char,
+                    mode: *const libc::c_char)
+                    -> c_int;
+    pub fn lua_dump(L: *mut lua_State,
+                    writer: lua_Writer,
+                    data: *mut libc::c_void,
+                    strip: c_int)
+                    -> c_int;
 
     // coroutine functions
     pub fn lua_yieldk(L: *mut lua_State,
@@ -444,10 +455,7 @@ pub unsafe fn lua_pushunsigned(L: *mut lua_State, n: lua_Unsigned) {
 }
 
 #[inline(always)]
-pub unsafe fn lua_tounsignedx(L: *mut lua_State,
-                              idx: c_int,
-                              isnum: *mut c_int)
-                              -> lua_Unsigned {
+pub unsafe fn lua_tounsignedx(L: *mut lua_State, idx: c_int, isnum: *mut c_int) -> lua_Unsigned {
     lua_tointegerx(L, idx, isnum) as lua_Unsigned
 }
 
