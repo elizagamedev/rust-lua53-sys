@@ -37,5 +37,6 @@ fn main() {
         .file("lua/src/lzio.c")
         .include("lua/src")
         .flag("-O2")
+        .define("LUA_USE_APICHECK", Some("1"))
         .compile("liblua.a");
 }
