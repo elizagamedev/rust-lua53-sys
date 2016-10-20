@@ -45,9 +45,9 @@ pub const LUA_TTHREAD: c_int = 8;
 pub const LUA_MINSTACK: c_int = 20;
 
 // predefined values in the registry
-pub const LUA_RIDX_MAINTHREAD: c_int = 1;
-pub const LUA_RIDX_GLOBALS: c_int = 2;
-pub const LUA_RIDX_LAST: c_int = LUA_RIDX_GLOBALS;
+pub const LUA_RIDX_MAINTHREAD: lua_Integer = 1;
+pub const LUA_RIDX_GLOBALS: lua_Integer = 2;
+pub const LUA_RIDX_LAST: lua_Integer = LUA_RIDX_GLOBALS;
 
 // type of numbers in Lua
 pub type lua_Number = libc::c_double;
@@ -215,7 +215,7 @@ extern "C" {
     pub fn lua_getfield(L: *mut lua_State, idx: c_int, k: *const libc::c_char) -> c_int;
     pub fn lua_geti(L: *mut lua_State, idx: c_int, n: lua_Integer) -> c_int;
     pub fn lua_rawget(L: *mut lua_State, idx: c_int) -> c_int;
-    pub fn lua_rawgeti(L: *mut lua_State, idx: c_int, n: c_int) -> c_int;
+    pub fn lua_rawgeti(L: *mut lua_State, idx: c_int, n: lua_Integer) -> c_int;
     pub fn lua_rawgetp(L: *mut lua_State, idx: c_int, p: *const libc::c_void) -> c_int;
 
     pub fn lua_createtable(L: *mut lua_State, narr: c_int, nrec: c_int);
@@ -229,7 +229,7 @@ extern "C" {
     pub fn lua_setfield(L: *mut lua_State, idx: c_int, k: *const libc::c_char);
     pub fn lua_seti(L: *mut lua_State, idx: c_int, n: lua_Integer);
     pub fn lua_rawset(L: *mut lua_State, idx: c_int);
-    pub fn lua_rawseti(L: *mut lua_State, idx: c_int, n: c_int);
+    pub fn lua_rawseti(L: *mut lua_State, idx: c_int, n: lua_Integer);
     pub fn lua_rawsetp(L: *mut lua_State, idx: c_int, p: *const libc::c_void);
     pub fn lua_setmetatable(L: *mut lua_State, objindex: c_int) -> c_int;
     pub fn lua_setuservalue(L: *mut lua_State, idx: c_int);
