@@ -312,6 +312,12 @@ extern "C" {
     pub fn luaopen_debug(L: *mut lua_State) -> c_int;
     pub fn luaopen_package(L: *mut lua_State) -> c_int;
     pub fn luaL_openlibs(L: *mut lua_State);
+
+    // lauxlib.h
+    pub fn luaL_traceback(L: *mut lua_State,
+                          L1: *mut lua_State,
+                          msg: *const libc::c_char,
+                          level: c_int);
 }
 
 // Pseudo-indices
